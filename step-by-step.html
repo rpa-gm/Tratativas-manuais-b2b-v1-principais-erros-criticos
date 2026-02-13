@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>B2B – Tratativas Manuais dos Principais Erros Críticos</title>
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f4f6f8;
+        margin: 0;
+        padding: 40px;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: auto;
+        background: #ffffff;
+        padding: 30px 40px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 5px;
+        border-bottom: 2px solid #e0e0e0;
+        padding-bottom: 10px;
+    }
+
+    h2 {
+        font-size: 18px;
+        margin-top: 30px;
+        color: #1f4e79;
+    }
+
+    em {
+        color: #666;
+    }
+
+    strong {
+        color: #000;
+    }
+
+    code {
+        background-color: #f1f1f1;
+        padding: 3px 6px;
+        border-radius: 4px;
+        font-family: Consolas, monospace;
+        font-size: 14px;
+    }
+
+    ul {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    li {
+        margin-bottom: 6px;
+    }
+
+    blockquote {
+        background-color: #fff8e1;
+        border-left: 4px solid #ffc107;
+        padding: 10px 15px;
+        margin: 15px 0;
+        color: #444;
+        font-size: 14px;
+    }
+
+    hr {
+        margin: 30px 0;
+        border: none;
+        border-top: 1px solid #ddd;
+    }
+
+    .alert {
+        background-color: #fdecea;
+        border-left: 4px solid #d93025;
+        padding: 15px;
+        margin: 20px 0;
+        font-size: 14px;
+    }
+
+    .info {
+        background-color: #e8f0fe;
+        border-left: 4px solid #1a73e8;
+        padding: 15px;
+        margin: 20px 0;
+        font-size: 14px;
+    }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>B2B – Tratativas Manuais dos Principais Erros Críticos</h1>
+<p><em>(RPA rodando em modo debug)</em></p>
+
+<div class="info">
+As instruções <strong>"Sair com segurança"</strong> nos itens abaixo indicam o processo:
+<ul>
+<li>No VivoCorp: <code>Menu &gt; fazer logout</code></li>
+</ul>
+</div>
+
+<div class="alert">
+Caso você encerre a execução sem fazer este processo, as credenciais serão bloqueadas por 1h.  
+Neste caso você precisa realizar o <strong>Processo de desbloqueio das credenciais</strong>:
+<ul>
+<li>Acessar: <code>https://www.portalinfob2b.com.br/login</code></li>
+<li>Entrar com as credenciais do robô que estão bloqueadas</li>
+<li>Encerrar a sessão no menu esquerdo (última opção)</li>
+</ul>
+</div>
+
+<hr>
+
+<h2>1. Erro no workflow de contas sem popup na tela</h2>
+<ul>
+<li>Sair com segurança do VivoCorp</li>
+<li>Enviar o pedido de volta para a fila</li>
+<li><code>Stop Debug</code></li>
+<li>Dar <code>Play</code> novamente no <code>main.py</code></li>
+</ul>
+
+<h2>2. Erro no workflow de contas com popup na tela</h2>
+<ul>
+<li>Clicar em <strong>OK</strong> ou fechar o popup</li>
+<li>Clicar na aba <strong>"Contas"</strong> ou tentar atualizar a página</li>
+<li>Dar <code>Play</code> no VSCode <strong>sem ter dado Stop antes</strong></li>
+</ul>
+
+<h2>3. Falha ao carregar o iframe de Anexos</h2>
+<ul>
+<li>Se houver aba aberta fora da tela do VivoCorp, fechar</li>
+<li>Na tela VivoCorp, sair com segurança</li>
+<li>Enviar o pedido de volta para a fila</li>
+<li><code>Stop Debug</code></li>
+<li>Dar <code>Play</code> novamente no <code>main.py</code></li>
+</ul>
+
+<h2>4. Erro de conexão com Oracle (site caiu)</h2>
+
+<blockquote>
+Esse erro não aparece em breakpoint específico, ele grita no navegador.  
+Do ponto de vista do código, ele vai em algum except, depende de onde ele estiver.
+</blockquote>
+
+<ul>
+<li>Se possível, sair com segurança</li>
+<li>Caso não consiga:
+    <ul>
+        <li><code>Stop Debug</code></li>
+        <li>Processo de desbloqueio das credenciais</li>
+    </ul>
+</li>
+<li>Enviar o pedido de volta para a fila</li>
+<li>Dar <code>Play</code> novamente no <code>main.py</code></li>
+</ul>
+
+<h2>5. Site expulsou o RPA do VivoCorp</h2>
+<ul>
+<li>Clicar em <strong>Sair</strong> ou <strong>Encerrar</strong></li>
+<li>Enviar o pedido de volta para a fila</li>
+<li><code>Stop Debug</code></li>
+<li>Dar <code>Play</code> novamente no <code>main.py</code></li>
+</ul>
+
+<h2>6. "Este acesso já está em uso"</h2>
+<ul>
+<li>Processo de desbloqueio das credenciais</li>
+<li>Entrar com as credenciais do robô</li>
+<li>Encerrar a sessão no menu esquerdo (última opção)</li>
+<li>Dar <code>Play</code> no VSCode <strong>sem ter dado Stop antes</strong></li>
+</ul>
+
+<h2>7. "Detectamos sessão da Siebel ativa: escolha a opção que se aplica a você."</h2>
+<ul>
+<li>Clique no primeiro <strong>"Clique aqui"</strong></li>
+<li>Fechar o navegador</li>
+<li>Enviar o pedido de volta para a fila</li>
+<li><code>Stop Debug</code></li>
+<li>Dar <code>Play</code> novamente no <code>main.py</code></li>
+</ul>
+
+</div>
+</body>
+</html>
