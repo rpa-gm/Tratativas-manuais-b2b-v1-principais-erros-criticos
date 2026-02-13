@@ -91,6 +91,14 @@
         margin: 20px 0;
         font-size: 14px;
     }
+    .alert-title {
+    color: #d93025;          /* vermelho alerta */
+    background-color: #fdecea;
+    padding: 8px 12px;
+    border-left: 4px solid #d93025;
+    border-radius: 4px;
+    }
+
 </style>
 </head>
 
@@ -186,6 +194,50 @@ Do ponto de vista do código, ele vai em algum except, depende de onde ele estiv
 <li><code>Stop Debug</code></li>
 <li>Dar <code>Play</code> novamente no <code>main.py</code></li>
 </ul>
+
+<hr>
+
+<h2 class="alert-title">8. Pedido preso em "Processing" (Limbo de Fila)</h2>
+
+
+<p>
+Quando um robô não consegue retornar o status final para a API que indica que aquele pedido foi tratado, 
+o pedido permanece na fila com o status <strong>"Processing"</strong>.
+</p>
+
+<p>
+Do ponto de vista do Zoho, existe um robô tratando este pedido.
+O pedido ficou em "limbo": o Zoho entende que o robô iniciou o tratamento,
+mas nunca finalizou até o momento.
+</p>
+<p>
+Do ponto de vista dos RPAs, não há mais pedidos disponíveis para captura.
+</p>
+
+<p><strong>Procedimento:</strong></p>
+<ul>
+<li>Após a fila zerar, verificar se ainda existem pedidos presos</li>
+<li>Capturar o <code>QueueId</code></li>
+<li>Reenviar o pedido para a fila</li>
+</ul>
+
+
+
+<p>
+A rota para reenviar o pedido é:
+</p>
+
+<blockquote>
+POST https://hub.macro.id/rpa/resetQueueItem/{QueueId}
+</blockquote>
+
+<p><strong>Exemplo:</strong></p>
+
+<blockquote>
+curl --request POST <br>
+--url https://hub.macro.id/rpa/resetQueueItem/F9NSYVLC <br>
+--header 'access-token: yw43qP9Txrhj4WV6VkZeWzVpg'
+</blockquote>
 
 </div>
 </body>
